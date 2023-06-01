@@ -23,3 +23,6 @@ puts is_square(5)
 puts is_square(25)
 puts is_square(51)
 puts is_square(100)
+
+#Best answer
+#  x < 0 ? false : Math.sqrt(x) % 1 == 0

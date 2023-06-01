@@ -12,20 +12,21 @@ Output string must be two numbers separated by a single space, and highest numbe
 =end
 
 def high_and_low(numbers)
-  #your code here
+  #Grab input string
   nums = numbers
+  #Starting values for current, high, low
   current = ""
   high, low = nil
   nums.each_char do |c|
-    if c == " "
+    if c == " " #When space is reached compare current to existing high and low values. Nil? check ensures that high and low will be set to first number in series
       if (high.nil? || current.to_i >= high.to_i)
-        high = current
+        high = current #Set new high value
       end
       if (low.nil? || current.to_i <= low.to_i)
-        low = current
+        low = current #Set new low value
       end
-      current = ""
-    elsif c == nums[-1]
+      current = "" #Set current to empty string in preparation for next number in input string
+    elsif c == nums[-1] #Needed an extra check to see if we're at the end of the input string. If so, update current and perform check
       current = current + c
       if (high.nil? || current.to_i >= high.to_i)
         high = current
@@ -33,12 +34,41 @@ def high_and_low(numbers)
       if (low.nil? || current.to_i <= low.to_i)
         low = current
       end
-    else
+    else #C is not a space, so it must be a negative sign or integer, therefore update value of current and continue iteration
       current = current + c
     end
+    #Debug output
     puts "current:#{current} high:#{high} low:#{low}"
   end
+  #return solution
   return "#{high} #{low}"
 end
 
+#Test case
 high_and_low("1 2 3 4")
+
+=begin
+So after seeing example solutions, this solution is EXTREMELY VERBOSE. Some better, more RUBY solutions
+
+def high_and_low(numbers)
+	numbers.split.map(&:to_i).minmax.reverse.join(' ')
+end
+
+def high_and_low(numbers)
+  numbers = numbers.split(' ')
+  min = numbers[0].to_i
+  max = numbers[0].to_i
+  numbers.each do |x|
+    min = x.to_i if min > x.to_i
+    max = x.to_i if max < x.to_is
+  end
+  "#{max} #{min}"
+end
+
+def high_and_low(numbers)
+  nums = numbers.split(' ')
+  max, min = nums.minmax { |a,b| b.to_i <=> a.to_i }
+  "#{max} #{min}"
+end
+
+=end

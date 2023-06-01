@@ -18,3 +18,12 @@ def friend(friends)
   end
   return actual_friends   
 end
+
+=begin
+"Better" solutions :
+
+def friend(friends)
+  friends.select { |name| name.length == 4 }
+end
+
+=end

@@ -40,7 +40,6 @@ if you want to translate, please ask before translating.
 
 def dirReduc(directions)
   d_arr = directions
-  print d_arr
   opposites = [
     ["NORTH", "SOUTH"],
     ["SOUTH", "NORTH"],
